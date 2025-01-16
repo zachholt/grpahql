@@ -1,0 +1,40 @@
+type Recipe {
+    id: ID!
+    authorId: ID!
+    title: String!
+    ingredients: [String!]!
+    instructions: [String!]!
+    category: Category
+}
+
+type Author {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    userName: String
+    dateOfBirth: String
+}
+
+type Category {
+    type: String!
+    description: String
+}
+
+input CategoryInput {
+    type: String!
+    description: String
+}
+
+type Query {
+    getRecipes: [Recipe]!
+    getRecipeById(recipeId: ID!): Recipe
+    getAuthors: [Author]!
+    getAuthorById(authorId: ID!): Author
+}
+
+type Mutation {
+    createAuthor(firstName: String!, lastName: String!, userName: String, dateOfBirth: String): Author!
+    createRecipe(authorId: ID!, title: String!, ingredients: [String!]!, instructions: [String!]!, category: CategoryInput): Recipe!
+    deleteAuthor(authorId: ID!): String
+    deleteRecipe(recipeId: ID!): String
+}
